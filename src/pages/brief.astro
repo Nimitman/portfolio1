@@ -1,4 +1,5 @@
 ---
+import { contact } from '../data/contact';
 import { url } from '../data/url';
 // The 30-second version. Offering an exit from your own spectacle is a leadership signal.
 import Base from '../layouts/Base.astro';
@@ -53,7 +54,14 @@ import { cases } from '../data/cases';
 
     <section>
       <h2 class="eyebrow">Contact</h2>
-      <p class="contact display tbd" data-q="Q18">email@domain</p>
+      {
+        contact.email ? (
+          <p class="contact display"><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+        ) : (
+          <p class="contact display tbd" data-q="Q18">Contact details coming soon</p>
+        )
+      }
+      {contact.linkedin && <p class="contact-links"><a href={contact.linkedin} rel="me">LinkedIn</a></p>}
     </section>
   </main>
 </Base>

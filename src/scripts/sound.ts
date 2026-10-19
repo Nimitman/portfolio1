@@ -11,6 +11,7 @@ export interface Sound {
 
 export function createSound(): Sound {
   const btn = document.querySelector<HTMLButtonElement>('.sound');
+  const label = btn?.querySelector<HTMLElement>('.sound-label');
   let ac: AudioContext | null = null;
   let master: GainNode, murmur: GainNode, hum: GainNode;
   let keysLevel = 0;
@@ -122,7 +123,9 @@ export function createSound(): Sound {
     on = !on;
     if (on && !ac) build();
     if (ac?.state === 'suspended') await ac.resume();
-    btn.setAttribute('aria-pressed', String(on));
+    btn.classList.toggle('on', on);
+    // Visible text is the accessible name: it states the current state.
+    if (label) label.textContent = on ? 'Sound on' : 'Sound off';
     btn.setAttribute('aria-label', on ? 'Sound on' : 'Sound off');
     if (ac) master.gain.setTargetAtTime(on ? 0.6 : 0, ac.currentTime, 0.3);
     applyMix();

@@ -5,9 +5,8 @@ import { hero } from '../../data/altitude';
 <section class="chapter hero" id="hero" data-chapter="hero" data-cursor="caret" data-length="short">
   <div class="stage">
     <div class="hero-inner">
-      <p class="eyebrow">Nimit Mangal · Principal Designer, Housing.com</p>
       <h1 class="display hero-line"><span class="hero-caret" aria-hidden="true"></span>{hero}</h1>
-      <p class="hero-sub">Thirteen years in real-estate tech. One ascent from a single pixel to a country-scale market, and one dive back.</p>
+      <p class="hero-sub"><strong>Nimit Mangal</strong>, design leader. Thirteen years in real-estate tech, in one ascent from a single pixel to a country-scale market and one dive back.</p>
       <p class="hero-hint mono" aria-hidden="true">Scroll to ascend</p>
     </div>
   </div>
@@ -31,6 +30,10 @@ import { hero } from '../../data/altitude';
     vertical-align: -0.04em;
     background: var(--signal);
     animation: hero-blink 1.06s steps(1) infinite;
+  }
+  .hero-sub strong {
+    color: var(--ink);
+    font-weight: 600;
   }
   .hero-sub {
     color: var(--ink-2);

@@ -1,4 +1,5 @@
 ---
+import { contact } from '../../data/contact';
 import { url } from '../../data/url';
 // 07 · Return. One uninterrupted ~1.2s dive from country to pixel through
 // nested frames, then the line readers repeat.
@@ -52,8 +53,17 @@ const frames = [
     </div>
     <div class="end-col">
       <p class="eyebrow">Contact</p>
-      <p class="end-contact display tbd" data-q="Q18">email@domain</p>
-      <p class="end-links mono"><span class="tbd" data-q="Q18">LinkedIn</span> · <a href={url('/brief')}>30-second version</a></p>
+      {
+        contact.email ? (
+          <p class="end-contact display"><a href={`mailto:${contact.email}`}>{contact.email}</a></p>
+        ) : (
+          <p class="end-contact display tbd" data-q="Q18">Contact details coming soon</p>
+        )
+      }
+      <p class="end-links mono">
+        {contact.linkedin && <><a href={contact.linkedin} rel="me">LinkedIn</a> · </>}
+        <a href={url('/brief')}>30-second version</a>
+      </p>
     </div>
   </div>
   <p class="end-foot mono">Nimit Mangal · Delhi NCR · 2013 → today</p>
@@ -208,6 +218,10 @@ const frames = [
   }
   .end-cases .mono {
     color: var(--ink-3);
+  }
+  .end-contact a {
+    text-decoration: none;
+    border-bottom: 1px solid var(--signal);
   }
   .end-contact {
     font-size: clamp(28px, 3.6vw, 44px);
