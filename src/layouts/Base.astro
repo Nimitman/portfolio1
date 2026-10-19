@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 import '../styles/global.css';
 
 interface Props {
@@ -21,7 +22,7 @@ const {
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
     <script is:inline>
       (function () {
         var d = document.documentElement;

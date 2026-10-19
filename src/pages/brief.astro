@@ -1,4 +1,5 @@
 ---
+import { url } from '../data/url';
 // The 30-second version. Offering an exit from your own spectacle is a leadership signal.
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
@@ -40,7 +41,7 @@ import { cases } from '../data/cases';
         {
           cases.map((c) => (
             <li>
-              <a href={`/work/${c.slug}`}>
+              <a href={url(`/work/${c.slug}`)}>
                 <span class="display">{c.title}</span>
                 <span>{c.summary}</span>
               </a>

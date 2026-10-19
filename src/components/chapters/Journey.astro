@@ -1,4 +1,5 @@
 ---
+import { url } from '../../data/url';
 // 03 · Journey. Noise → order: a listing covered in badge stickers. Scroll (or click)
 // peels them until one trust signal remains.
 const stickers = [
@@ -21,7 +22,7 @@ const stickers = [
         <h2>Eight badges. One signal.</h2>
         <p>A listing covered in badges, each added by a team with a reason. Together they tell the buyer nothing.</p>
         <p>Scroll, or peel them yourself, until only trust is left.</p>
-        <a class="doorway" href="/work/super-broker">Super Broker</a>
+        <a class="doorway" href={url('/work/super-broker')}>Super Broker</a>
       </div>
       <div class="scene jr-scene">
         <article class="jr-card" aria-label="Property listing">

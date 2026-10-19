@@ -1,9 +1,10 @@
 ---
+import { url } from '../data/url';
 // Top-right: lens switch (Surface / Structure), sound toggle, 30-second version.
 ---
 
 <div class="controls">
-  <a class="ctl-brief mono" href="/brief">30-second version</a>
+  <a class="ctl-brief mono" href={url('/brief')}>30-second version</a>
   <div class="lens" role="group" aria-label="Lens">
     <button type="button" data-lens-set="surface" aria-pressed="true">Surface</button>
     <button type="button" data-lens-set="structure" aria-pressed="false">Structure</button>

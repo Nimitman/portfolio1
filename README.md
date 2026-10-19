@@ -26,3 +26,12 @@ npm run check    # type check
 | Colours, type, tokens | `src/styles/global.css` |
 
 Placeholders waiting on parked questions use `class="tbd" data-q="Q#"`. Switch to the **Structure** lens to see which question each depends on. `grep -rn 'tbd' src` lists all of them.
+
+## Deploy
+
+Pushes to `main` build and deploy to GitHub Pages via `.github/workflows/deploy.yml`:
+https://nimitman.github.io/portfolio1/
+
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Internal links go through `url()` (`src/data/url.ts`) so the `/portfolio1` base path is applied. For a custom domain, set `BASE_PATH=/` and `SITE_URL=https://your.domain` in the workflow's build step.

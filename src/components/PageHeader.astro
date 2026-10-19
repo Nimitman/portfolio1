@@ -1,12 +1,13 @@
 ---
+import { url } from '../data/url';
 interface Props {
   back?: { href: string; label: string };
 }
-const { back = { href: '/', label: 'The ascent' } } = Astro.props;
+const { back = { href: url('/'), label: 'The ascent' } } = Astro.props;
 ---
 
 <header class="ph">
-  <a class="ph-mono" href="/" aria-label="Home">NM</a>
+  <a class="ph-mono" href={url('/')} aria-label="Home">NM</a>
   <a class="ph-back mono" href={back.href}>← {back.label}</a>
 </header>
 

@@ -1,4 +1,5 @@
 ---
+import { url } from '../../data/url';
 // 04 · Business. Noise → order: particles (credits, slots) drift, then flow to
 // seller actions; listing quality rises; event slots fill. Pronoun shift fires at the end.
 const actions = ['Respond to a lead', 'Add real photos', 'Verify the listing'];
@@ -14,8 +15,8 @@ const actions = ['Respond to a lead', 'Add real photos', 'Verify the listing'];
         </h2>
         <p>Credits and event slots. Each particle is a unit of value. Where it flows decides what sellers do.</p>
         <p>Credits flow to seller actions and listing quality rises. Event slots fill and revenue accumulates.</p>
-        <a class="doorway" href="/work/horizon">Project Horizon</a>
-        <a class="doorway" href="/work/events">Housing Events</a>
+        <a class="doorway" href={url('/work/horizon')}>Project Horizon</a>
+        <a class="doorway" href={url('/work/events')}>Housing Events</a>
       </div>
       <div class="scene bz-scene">
         <canvas class="bz-canvas" aria-hidden="true"></canvas>
