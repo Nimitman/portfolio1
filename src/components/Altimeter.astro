@@ -1,0 +1,135 @@
+---
+import { chapters, formatAltitude } from '../data/altitude';
+const first = chapters[0];
+---
+
+<div class="altimeter" id="altimeter">
+  <button class="alt-button" type="button" aria-expanded="false" aria-controls="alt-nav">
+    <span class="alt-mono" aria-hidden="true">NM</span>
+    <span class="alt-readout mono">
+      <span class="alt-value">{formatAltitude(first.metres)}</span>
+      <span class="alt-sep">·</span>
+      <span class="alt-label">{first.label}</span>
+    </span>
+    <span class="visually-hidden">Open altitude navigation</span>
+  </button>
+  <nav class="alt-nav" id="alt-nav" aria-label="Chapters" hidden>
+    <ol>
+      {
+        chapters.map((c) => (
+          <li>
+            <a href={`#${c.id}`} data-target={c.id}>
+              <span class="mono">{formatAltitude(c.metres)}</span>
+              <span>{c.id === 'return' ? 'return' : c.label}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+  <div class="alt-progress" aria-hidden="true"><span></span></div>
+</div>
+
+<style>
+  .altimeter {
+    position: fixed;
+    top: 16px;
+    left: var(--gutter);
+    z-index: 50;
+  }
+  .alt-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px 6px 6px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    cursor: pointer;
+  }
+  .alt-mono {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--f-display);
+    font-size: 15px;
+    letter-spacing: 0.02em;
+  }
+  .alt-readout {
+    display: flex;
+    gap: 6px;
+    font-variant-numeric: tabular-nums;
+    min-width: 15ch;
+  }
+  .alt-value {
+    color: var(--ink);
+  }
+  .alt-sep,
+  .alt-label {
+    color: var(--ink-3);
+  }
+  @media (max-width: 820px) {
+    .alt-readout {
+      min-width: 0;
+    }
+    .alt-sep,
+    .alt-label {
+      display: none;
+    }
+  }
+  .alt-nav {
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .alt-nav ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .alt-nav a {
+    display: grid;
+    grid-template-columns: 9ch 1fr;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .alt-nav a:hover,
+  .alt-nav a[aria-current='true'] {
+    background: var(--paper-2);
+  }
+  .alt-nav .mono {
+    color: var(--ink-3);
+  }
+  .alt-progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100vh;
+    display: none;
+  }
+  .alt-progress span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--signal);
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+  :global(html.touch) .alt-progress {
+    display: block;
+  }
+</style>

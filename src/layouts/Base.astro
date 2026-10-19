@@ -1,0 +1,40 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Nimit Mangal — design leadership at every altitude, from a pixel to a market.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" data-lens="surface">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('rm');
+        if (window.matchMedia('(pointer: coarse)').matches) d.classList.add('touch');
+        try {
+          var lens = localStorage.getItem('altitude:lens');
+          if (lens === 'structure') d.dataset.lens = 'structure';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

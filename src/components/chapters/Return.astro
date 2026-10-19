@@ -1,0 +1,230 @@
+---
+// 07 · Return. One uninterrupted ~1.2s dive from country to pixel through
+// nested frames, then the line readers repeat.
+import { cases } from '../../data/cases';
+
+const frames = [
+  { k: 'country', label: 'country' },
+  { k: 'city', label: 'city' },
+  { k: 'office', label: 'office' },
+  { k: 'screen', label: 'screen' },
+  { k: 'button', label: 'component' },
+  { k: 'pixel', label: 'pixel' },
+];
+---
+
+<section class="chapter" id="return" data-chapter="return" data-cursor="caret" data-length="short">
+  <div class="stage rt-stage">
+    <div class="rt-dive" aria-hidden="true">
+      {
+        frames.map((f) => (
+          <div class={`rt-frame rt-${f.k}`} data-frame={f.k}>
+            <span class="rt-tag mono">{f.label}</span>
+          </div>
+        ))
+      }
+    </div>
+    <div class="rt-line">
+      <p class="display">
+        And I still notice when it’s <span class="rt-off">2px off.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="end" id="end">
+  <div class="end-inner">
+    <div class="end-col">
+      <p class="eyebrow">Case studies</p>
+      <ul class="end-cases">
+        {
+          cases.map((c) => (
+            <li>
+              <a href={`/work/${c.slug}`}>
+                <span class="end-case-title display">{c.title}</span>
+                <span class="mono">{c.kicker}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="end-col">
+      <p class="eyebrow">Contact</p>
+      <p class="end-contact display tbd" data-q="Q18">email@domain</p>
+      <p class="end-links mono"><span class="tbd" data-q="Q18">LinkedIn</span> · <a href="/brief">30-second version</a></p>
+    </div>
+  </div>
+  <p class="end-foot mono">Nimit Mangal · Delhi NCR · 2013 → today</p>
+</footer>
+
+<style>
+  .rt-stage {
+    background: var(--paper);
+  }
+  .rt-dive {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .rt-frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(70vmin, 560px);
+    height: min(70vmin, 560px);
+    margin: calc(min(70vmin, 560px) / -2) 0 0 calc(min(70vmin, 560px) / -2);
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+  .rt-tag {
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    color: var(--ink-3);
+  }
+  .rt-country {
+    background: radial-gradient(circle at 46% 38%, #ffcf8a 0 2px, transparent 3px),
+      radial-gradient(circle at 40% 62%, #ffcf8a 0 2px, transparent 3px),
+      radial-gradient(circle at 62% 56%, #ffcf8a 0 2px, transparent 3px),
+      radial-gradient(circle at 52% 50%, #fff 0 3px, transparent 5px), var(--night);
+    border-radius: 8px;
+  }
+  .rt-city {
+    background:
+      linear-gradient(to right, rgba(255, 207, 138, 0.35) 1px, transparent 1px) 0 0 / 28px 28px,
+      linear-gradient(to bottom, rgba(255, 207, 138, 0.35) 1px, transparent 1px) 0 0 / 28px 28px,
+      var(--night);
+    border-radius: 8px;
+  }
+  .rt-office {
+    background: repeating-linear-gradient(to bottom, var(--paper-2) 0 34px, var(--rule) 34px 36px);
+    border: 1px solid var(--rule);
+  }
+  .rt-screen {
+    width: min(36vmin, 280px);
+    height: min(70vmin, 560px);
+    margin-left: calc(min(36vmin, 280px) / -2);
+    border: 8px solid var(--ink);
+    border-radius: 36px;
+    background: var(--paper);
+  }
+  .rt-screen::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 60%;
+    height: 40px;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: var(--signal);
+  }
+  .rt-button {
+    border-radius: 999px;
+    height: min(22vmin, 176px);
+    margin-top: calc(min(22vmin, 176px) / -2);
+    background: var(--signal);
+  }
+  .rt-pixel {
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+    background: var(--signal);
+  }
+  .rt-pixel .rt-tag {
+    bottom: -28px;
+    white-space: nowrap;
+  }
+  .rt-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 12vh;
+    text-align: center;
+    padding: 0 var(--gutter);
+    opacity: 0;
+  }
+  .rt-line p {
+    margin: 0;
+    font-size: clamp(32px, 5vw, 72px);
+  }
+  .rt-off {
+    display: inline-block;
+    transform: translate(2px, -2px);
+    color: var(--signal);
+  }
+  .rt-off.fixed {
+    transform: none;
+    transition: transform 0.3s var(--ease-out);
+  }
+  .end {
+    position: relative;
+    z-index: 10;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 96px var(--gutter) 32px;
+    --ink-3: color-mix(in srgb, var(--paper) 55%, var(--ink));
+    --rule: color-mix(in srgb, var(--paper) 18%, var(--ink));
+  }
+  .end-inner {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 64px;
+  }
+  @media (max-width: 820px) {
+    .end-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+  .end-cases {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+  }
+  .end-cases a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--rule);
+    text-decoration: none;
+  }
+  .end-cases li:last-child a {
+    border-bottom: 1px solid var(--rule);
+  }
+  .end-case-title {
+    font-size: clamp(28px, 3.6vw, 44px);
+    transition: color 0.2s;
+  }
+  .end-cases a:hover .end-case-title {
+    color: var(--signal);
+  }
+  .end-cases .mono {
+    color: var(--ink-3);
+  }
+  .end-contact {
+    font-size: clamp(28px, 3.6vw, 44px);
+    margin: 16px 0 12px;
+  }
+  .end-links {
+    color: var(--ink-3);
+  }
+  .end-foot {
+    width: min(1200px, 100%);
+    margin: 96px auto 0;
+    color: var(--ink-3);
+  }
+  :global(html.rm) .rt-frame {
+    opacity: 0;
+  }
+  :global(html.rm) .rt-pixel,
+  :global(html.rm) .rt-line {
+    opacity: 1;
+  }
+</style>

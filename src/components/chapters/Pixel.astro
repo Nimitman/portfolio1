@@ -1,0 +1,107 @@
+---
+// 01 · Pixel. Noise → order: a misaligned UI fragment snaps onto the 8px grid.
+const parts = [
+  { k: 'media', x: 0, y: 0, w: 40, h: 22, dx: 13, dy: -9, r: -2.5 },
+  { k: 'title', x: 0, y: 25, w: 30, h: 3, dx: -7, dy: 5, r: 1.5 },
+  { k: 'meta', x: 0, y: 30, w: 20, h: 2, dx: 5, dy: 3, r: -1 },
+  { k: 'price', x: 0, y: 35, w: 14, h: 4, dx: -11, dy: 7, r: 2 },
+  { k: 'cta', x: 28, y: 35, w: 12, h: 4, dx: 9, dy: -5, r: -3 },
+];
+---
+
+<section class="chapter" id="pixel" data-chapter="pixel" data-cursor="caret">
+  <div class="stage">
+    <div class="stage-inner">
+      <div class="copy">
+        <p class="eyebrow">01 · Pixel · 0.3 mm</p>
+        <h2>I started by building the screens.</h2>
+        <p>Front-end engineering years at PropTiger and Makaan, then managing developers.</p>
+        <p>Not “I can code.” I know what every design decision costs to build.</p>
+        <p class="tbd" data-q="Q10">One line on the move from code to design.</p>
+      </div>
+      <div class="scene px-scene">
+        <div class="px-grid" aria-hidden="true"></div>
+        <div class="px-card" role="img" aria-label="A listing card snapping onto an 8 pixel grid">
+          {
+            parts.map((p) => (
+              <div
+                class={`px-part px-${p.k}`}
+                style={`--x:${p.x};--y:${p.y};--w:${p.w};--h:${p.h}`}
+                data-dx={p.dx}
+                data-dy={p.dy}
+                data-r={p.r}
+              />
+            ))
+          }
+        </div>
+        <div class="px-readout mono" aria-hidden="true"><span class="px-off">Δ 13px</span></div>
+        <div class="note" style="top:6%;left:4%"><b>Constraint</b>8px base unit, shared with engineering</div>
+        <div class="note" style="bottom:8%;right:4%"><b>Decision</b>Snap to the system, don’t nudge by eye</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .px-scene {
+    --cell: 8px;
+  }
+  .px-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, var(--rule) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+    background-size: var(--cell) var(--cell);
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    opacity: 0.9;
+  }
+  .px-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: calc(40 * var(--cell));
+    height: calc(39 * var(--cell));
+    transform: translate(-50%, -50%);
+  }
+  @media (max-width: 820px) {
+    .px-scene {
+      --cell: 6px;
+    }
+  }
+  .px-part {
+    position: absolute;
+    left: calc(var(--x) * var(--cell));
+    top: calc(var(--y) * var(--cell));
+    width: calc(var(--w) * var(--cell));
+    height: calc(var(--h) * var(--cell));
+    border-radius: 2px;
+    background: var(--ink);
+    will-change: transform;
+  }
+  .px-media {
+    background:
+      repeating-linear-gradient(135deg, transparent 0 10px, var(--rule) 10px 11px),
+      var(--paper-2);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .px-meta {
+    background: var(--ink-3);
+  }
+  .px-price {
+    background: var(--ink);
+  }
+  .px-cta {
+    background: var(--signal);
+    border-radius: 999px;
+  }
+  .px-readout {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    color: var(--signal);
+  }
+</style>

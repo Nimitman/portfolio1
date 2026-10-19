@@ -1,0 +1,115 @@
+---
+// The 30-second version. Offering an exit from your own spectacle is a leadership signal.
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { hero } from '../data/altitude';
+import { cases } from '../data/cases';
+---
+
+<Base title="Nimit Mangal · 30-second version">
+  <PageHeader />
+  <main class="brief">
+    <p class="eyebrow">30-second version</p>
+    <h1 class="display">{hero}</h1>
+    <p class="lede">
+      Design leadership is the ability to change altitude without losing resolution: from a 2px misalignment to a revenue
+      model to a team structure in one meeting, and knowing which altitude a problem lives at.
+    </p>
+
+    <section>
+      <h2 class="eyebrow">Why me</h2>
+      <ul class="facts">
+        <li><b>Developer → designer → design leader.</b> I know the build cost of every decision.</li>
+        <li><b>13 years in one domain.</b> PropTiger, Makaan, Housing.com. Systems memory.</li>
+        <li><b>Revenue-side design.</b> Credits, event slots, trust signals. Design that moved business models, not just screens.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Three outcomes</h2>
+      <ol class="outcomes">
+        <li class="tbd" data-q="Q14">Outcome one, with a publishable number.</li>
+        <li class="tbd" data-q="Q14">Outcome two, with a publishable number.</li>
+        <li class="tbd" data-q="Q14">Outcome three: an org behaviour change.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Case studies</h2>
+      <ul class="cases">
+        {
+          cases.map((c) => (
+            <li>
+              <a href={`/work/${c.slug}`}>
+                <span class="display">{c.title}</span>
+                <span>{c.summary}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="eyebrow">Contact</h2>
+      <p class="contact display tbd" data-q="Q18">email@domain</p>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .brief {
+    width: min(760px, 100% - 2 * var(--gutter));
+    margin: 48px auto 120px;
+  }
+  h1 {
+    font-size: clamp(40px, 7vw, 84px);
+    margin: 16px 0 24px;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--ink-2);
+    margin: 0 0 64px;
+  }
+  section {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+  h2 {
+    margin: 0 0 16px;
+    font-weight: 400;
+  }
+  .facts,
+  .outcomes,
+  .cases {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+  .outcomes {
+    list-style: decimal inside;
+  }
+  .facts b {
+    font-weight: 600;
+  }
+  .cases a {
+    display: grid;
+    gap: 4px;
+    padding: 12px 0;
+    text-decoration: none;
+    color: var(--ink-2);
+  }
+  .cases .display {
+    font-size: 32px;
+    color: var(--ink);
+  }
+  .cases a:hover .display {
+    color: var(--signal);
+  }
+  .contact {
+    font-size: 32px;
+    margin: 0;
+  }
+</style>

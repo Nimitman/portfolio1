@@ -1,0 +1,77 @@
+---
+import { hero } from '../../data/altitude';
+---
+
+<section class="chapter hero" id="hero" data-chapter="hero" data-cursor="caret" data-length="short">
+  <div class="stage">
+    <div class="hero-inner">
+      <p class="eyebrow">Nimit Mangal · Principal Designer, Housing.com</p>
+      <h1 class="display hero-line"><span class="hero-caret" aria-hidden="true"></span>{hero}</h1>
+      <p class="hero-sub">Thirteen years in real-estate tech. One ascent from a single pixel to a country-scale market, and one dive back.</p>
+      <p class="hero-hint mono" aria-hidden="true">Scroll to ascend</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-inner {
+    width: min(1100px, 100% - 2 * var(--gutter));
+  }
+  .hero-line {
+    font-size: clamp(44px, 8.4vw, 128px);
+    margin: 20px 0 28px;
+    max-width: 14ch;
+    position: relative;
+  }
+  .hero-caret {
+    display: inline-block;
+    width: 0.06em;
+    height: 0.82em;
+    margin-right: 0.12em;
+    vertical-align: -0.04em;
+    background: var(--signal);
+    animation: hero-blink 1.06s steps(1) infinite;
+  }
+  .hero-sub {
+    color: var(--ink-2);
+    max-width: 46ch;
+    font-size: 17px;
+    margin: 0;
+  }
+  .hero-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ink-3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(var(--ink-3), transparent);
+    animation: hint 2s var(--ease-out) infinite;
+    transform-origin: top;
+  }
+  @keyframes hero-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  @keyframes hint {
+    0% {
+      transform: scaleY(0);
+    }
+    60% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

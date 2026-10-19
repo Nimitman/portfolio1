@@ -1,0 +1,161 @@
+---
+// 03 · Journey. Noise → order: a listing covered in badge stickers. Scroll (or click)
+// peels them until one trust signal remains.
+const stickers = [
+  { t: 'Hot deal', x: 6, y: 8, r: -12, c: 'a' },
+  { t: 'Premium', x: 58, y: 4, r: 8, c: 'b' },
+  { t: 'Trending', x: 30, y: 26, r: -4, c: 'c' },
+  { t: 'Best price', x: 64, y: 38, r: 14, c: 'd' },
+  { t: 'Featured', x: 4, y: 46, r: 6, c: 'b' },
+  { t: 'Top agent', x: 40, y: 56, r: -10, c: 'a' },
+  { t: 'Most viewed', x: 12, y: 70, r: -6, c: 'd' },
+  { t: 'Price drop', x: 62, y: 72, r: 9, c: 'c' },
+];
+---
+
+<section class="chapter" id="journey" data-chapter="journey" data-cursor="peel">
+  <div class="stage">
+    <div class="stage-inner">
+      <div class="copy">
+        <p class="eyebrow">03 · Journey · 30 cm</p>
+        <h2>Eight badges. One signal.</h2>
+        <p>A listing covered in badges, each added by a team with a reason. Together they tell the buyer nothing.</p>
+        <p>Scroll, or peel them yourself, until only trust is left.</p>
+        <a class="doorway" href="/work/super-broker">Super Broker</a>
+      </div>
+      <div class="scene jr-scene">
+        <article class="jr-card" aria-label="Property listing">
+          <div class="jr-media"></div>
+          <div class="jr-body">
+            <div class="jr-price">₹ 1.4 Cr</div>
+            <div class="jr-title">3 BHK Apartment · Sector 62, Noida</div>
+            <div class="jr-meta mono">1,450 sq.ft · Ready to move</div>
+            <div class="jr-broker">
+              <span class="jr-avatar"></span>
+              <span>Listed by broker</span>
+              <span class="jr-trust">Super Broker</span>
+            </div>
+          </div>
+        </article>
+        <div class="jr-stickers">
+          {
+            stickers.map((s) => (
+              <button
+                type="button"
+                class={`jr-sticker jr-${s.c}`}
+                style={`left:${s.x}%;top:${s.y}%;--r:${s.r}deg`}
+                aria-label={`Peel off "${s.t}"`}
+              >
+                {s.t}
+              </button>
+            ))
+          }
+        </div>
+        <div class="note" style="top:2%;left:2%"><b>Knot</b>Every badge has an owner who wants it kept</div>
+        <div class="note" style="bottom:2%;right:2%"><b>Reframe</b>Trust is a property of the person, not the listing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .jr-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(380px, 88%);
+    transform: translate(-50%, -50%);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.35);
+  }
+  .jr-media {
+    aspect-ratio: 16 / 10;
+    background:
+      linear-gradient(160deg, transparent 55%, rgba(0, 0, 0, 0.18)),
+      repeating-linear-gradient(90deg, var(--paper-2) 0 18px, color-mix(in srgb, var(--paper-2) 80%, var(--ink)) 18px 20px);
+  }
+  .jr-body {
+    padding: 16px 18px 18px;
+  }
+  .jr-price {
+    font-family: var(--f-display);
+    font-size: 32px;
+    line-height: 1;
+  }
+  .jr-title {
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .jr-meta {
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .jr-broker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .jr-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    border: 1px solid var(--rule);
+  }
+  .jr-trust {
+    margin-left: auto;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .jr-stickers {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(440px, 96%);
+    height: min(460px, 100%);
+    transform: translate(-50%, -50%);
+  }
+  .jr-sticker {
+    position: absolute;
+    padding: 8px 14px;
+    border: 2px solid var(--paper);
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    transform: rotate(var(--r));
+    transform-origin: 0 0;
+    box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+    will-change: transform;
+  }
+  .jr-a {
+    background: #ff4f1f;
+    color: #fff;
+  }
+  .jr-b {
+    background: #ffd23f;
+    color: #121211;
+  }
+  .jr-c {
+    background: #2f5bff;
+    color: #fff;
+  }
+  .jr-d {
+    background: #19c37d;
+    color: #0b2a1c;
+  }
+</style>

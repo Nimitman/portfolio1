@@ -1,0 +1,59 @@
+---
+// 02 · Component. Noise → order: dozens of inconsistent buttons collapse into
+// one component with variants. Buttons are generated client-side.
+---
+
+<section class="chapter" id="component" data-chapter="component" data-cursor="inspector">
+  <div class="stage">
+    <div class="stage-inner">
+      <div class="copy">
+        <p class="eyebrow">02 · Component · 3 cm</p>
+        <h2>Systems over screens.</h2>
+        <p>Four platforms: consumer, owner, broker, developer. One language underneath all of them.</p>
+        <p>Inspect the result. Every value is a token, not a decision made twice.</p>
+        <p class="tbd" data-q="Risk: ownership">My specific contribution to the system, stated precisely.</p>
+      </div>
+      <div class="scene cmp-scene" aria-label="Inconsistent buttons collapsing into one component with variants" role="img">
+        <div class="cmp-field"></div>
+        <div class="cmp-legend mono" aria-hidden="true">
+          <span>primary</span><span>secondary</span><span>ghost</span>
+        </div>
+        <div class="note" style="top:4%;right:2%"><b>Trade-off</b>Fewer variants, less local freedom per platform</div>
+        <div class="note" style="bottom:4%;left:2%"><b>Decision</b>Platforms differ by content, not by component</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cmp-field {
+    position: absolute;
+    inset: 0;
+  }
+  .cmp-field :global(.cmp-btn) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    white-space: nowrap;
+    font-family: var(--f-body);
+    pointer-events: auto;
+    will-change: transform;
+  }
+  .cmp-legend {
+    position: absolute;
+    left: 50%;
+    top: calc(50% - 116px);
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(3, 132px);
+    text-align: center;
+    color: var(--ink-3);
+    opacity: 0;
+  }
+  @media (max-width: 820px) {
+    .cmp-legend {
+      grid-template-columns: repeat(3, 100px);
+      top: calc(50% - 100px);
+    }
+  }
+</style>
