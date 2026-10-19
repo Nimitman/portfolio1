@@ -15,6 +15,10 @@
   --structure: #2f5bff;
   --night: #07080b;
   --glass: rgba(243, 241, 236, 0.72);
+  /* 32px signal-red grid behind every surface */
+  --grid-line: rgba(255, 79, 31, 0.1);
+  --grid: linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) 0 0 / 32px 32px;
 
   --f-display: 'Instrument Serif', 'Times New Roman', serif;
   --f-body: 'Inter Variable', system-ui, sans-serif;
@@ -37,6 +41,7 @@
     --rule: rgba(237, 234, 227, 0.12);
     --structure: #7c9bff;
     --glass: rgba(13, 13, 12, 0.7);
+    --grid-line: rgba(255, 79, 31, 0.16);
   }
 }
 
@@ -61,7 +66,8 @@ html.lenis body {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--grid), var(--paper);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--f-body);
   font-size: 16px;
@@ -156,7 +162,7 @@ html[data-lens='structure'] .tbd[data-q]::after {
   overflow: hidden;
   display: grid;
   place-items: center;
-  background: var(--paper);
+  background: var(--grid), var(--paper);
   opacity: 0;
   visibility: hidden;
   will-change: transform, opacity;
