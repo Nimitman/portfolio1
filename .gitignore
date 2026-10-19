@@ -3,3 +3,8 @@ dist/
 .astro/
 .DS_Store
 *.log
+
+# Impeccable: platform binary is downloaded per machine on first run;
+# hook config is machine-local by design.
+.claude/skills/impeccable/scripts/bin/
+.claude/settings.local.json
