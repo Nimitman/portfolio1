@@ -1,0 +1,133 @@
+---
+import { url } from '../../data/url';
+// 04 · Business. Noise → order: particles (credits, slots) drift, then flow to
+// seller actions; listing quality rises; event slots fill. Pronoun shift fires at the end.
+const actions = ['Respond to a lead', 'Add real photos', 'Verify the listing'];
+---
+
+<section class="chapter" id="business" data-chapter="business" data-cursor="magnet">
+  <div class="stage">
+    <div class="stage-inner">
+      <div class="copy">
+        <p class="eyebrow">04 · Business · 300 m</p>
+        <h2>
+          <span class="pronoun" data-pronoun><span class="pn-i">I</span><span class="pn-we">We</span></span> designed how the business makes money.
+        </h2>
+        <p>Credits and event slots. Each particle is a unit of value. Where it flows decides what sellers do.</p>
+        <p>Credits flow to seller actions and listing quality rises. Event slots fill and revenue accumulates.</p>
+        <a class="doorway" href={url('/work/horizon')}>Project Horizon</a>
+        <a class="doorway" href={url('/work/events')}>Housing Events</a>
+      </div>
+      <div class="scene bz-scene">
+        <canvas class="bz-canvas" aria-hidden="true"></canvas>
+        <ul class="bz-actions" aria-label="Seller actions credits flow toward">
+          {actions.map((a) => <li class="bz-action mono">{a}</li>)}
+        </ul>
+        <div class="bz-quality" aria-hidden="true">
+          <span class="mono">Listing quality</span>
+          <div class="bz-bar"><span></span></div>
+        </div>
+        <div class="bz-slots" aria-hidden="true">
+          <span class="mono">Event slots</span>
+          <div class="bz-grid">{Array.from({ length: 24 }, () => <i />)}</div>
+        </div>
+        <div class="note" style="top:2%;left:2%"><b>Decision</b>Price the behaviour you want, not the listing</div>
+        <div class="note" style="bottom:22%;right:2%"><b>Constraint</b>DPDP compliance on every seller touchpoint</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bz-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .bz-actions {
+    position: absolute;
+    right: 4%;
+    top: 14%;
+    bottom: 34%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bz-action {
+    padding: 8px 12px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    background: var(--paper);
+    color: var(--ink);
+    text-align: center;
+    opacity: 0.3;
+    transition: opacity 0.4s;
+  }
+  .bz-action.on {
+    opacity: 1;
+  }
+  .bz-quality,
+  .bz-slots {
+    position: absolute;
+    bottom: 4%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--ink-3);
+  }
+  .bz-quality {
+    left: 4%;
+    width: 36%;
+  }
+  .bz-slots {
+    right: 4%;
+    width: 40%;
+  }
+  .bz-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--rule);
+    overflow: hidden;
+  }
+  .bz-bar span {
+    display: block;
+    height: 100%;
+    background: var(--signal);
+    transform-origin: left;
+    transform: scaleX(0.12);
+  }
+  .bz-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+  }
+  .bz-grid i {
+    aspect-ratio: 1;
+    border-radius: 2px;
+    border: 1px solid var(--rule);
+    transition: background 0.3s;
+  }
+  .bz-grid i.on {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .pronoun {
+    position: relative;
+    display: inline-grid;
+    justify-items: start;
+    vertical-align: baseline;
+  }
+  .pronoun > span {
+    grid-area: 1 / 1;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .pn-we {
+    opacity: 0;
+    color: var(--signal);
+  }
+</style>

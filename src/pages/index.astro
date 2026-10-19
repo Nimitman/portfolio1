@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Loader from '../components/Loader.astro';
+import Altimeter from '../components/Altimeter.astro';
+import Controls from '../components/Controls.astro';
+import Cursor from '../components/Cursor.astro';
+import Hero from '../components/chapters/Hero.astro';
+import Pixel from '../components/chapters/Pixel.astro';
+import Component from '../components/chapters/Component.astro';
+import Journey from '../components/chapters/Journey.astro';
+import Business from '../components/chapters/Business.astro';
+import People from '../components/chapters/People.astro';
+import Market from '../components/chapters/Market.astro';
+import Return from '../components/chapters/Return.astro';
+---
+
+<Base title="Nimit Mangal · Altitude">
+  <Loader />
+  <Altimeter />
+  <Controls />
+  <Cursor />
+  <main>
+    <Hero />
+    <Pixel />
+    <Component />
+    <Journey />
+    <Business />
+    <People />
+    <Market />
+    <Return />
+  </main>
+  <script>
+    import '../scripts/main';
+  </script>
+</Base>

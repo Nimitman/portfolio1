@@ -1,0 +1,41 @@
+---
+import { url } from '../data/url';
+interface Props {
+  back?: { href: string; label: string };
+}
+const { back = { href: url('/'), label: 'The ascent' } } = Astro.props;
+---
+
+<header class="ph">
+  <a class="ph-mono" href={url('/')} aria-label="Home">NM</a>
+  <a class="ph-back mono" href={back.href}>← {back.label}</a>
+</header>
+
+<style>
+  .ph {
+    width: min(1100px, 100% - 2 * var(--gutter));
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ph-mono {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--f-display);
+    text-decoration: none;
+  }
+  .ph-back {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .ph-back:hover {
+    color: var(--ink);
+  }
+</style>

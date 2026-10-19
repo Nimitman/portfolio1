@@ -1,0 +1,73 @@
+---
+// Chapter 0. A caret in an empty field types one line of 2013-era CSS,
+// which compiles into a single rendered pixel.
+---
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-year mono">2013</div>
+  <div class="loader-line mono"><span class="loader-typed"></span><span class="loader-caret"></span></div>
+  <div class="loader-pixel"></div>
+  <button class="loader-skip mono" type="button">Skip</button>
+</div>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--paper);
+    display: grid;
+    place-items: center;
+  }
+  :global(html.rm) .loader,
+  :global(html.loaded) .loader {
+    display: none;
+  }
+  .loader-year {
+    position: absolute;
+    top: calc(50% - 48px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--ink-3);
+  }
+  .loader-line {
+    font-size: clamp(12px, 1.6vw, 16px);
+    color: var(--ink);
+    white-space: pre;
+    display: flex;
+    align-items: center;
+  }
+  .loader-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.25em;
+    margin-left: 1px;
+    background: var(--signal);
+    animation: blink 1.06s steps(1) infinite;
+  }
+  .loader-pixel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 2px;
+    margin: -1px 0 0 -1px;
+    background: var(--signal);
+    opacity: 0;
+  }
+  .loader-skip {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    background: none;
+    border: 0;
+    color: var(--ink-3);
+    cursor: pointer;
+    padding: 8px;
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

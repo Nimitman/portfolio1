@@ -1,0 +1,169 @@
+---
+import { url } from '../../data/url';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { cases, type CaseStudy } from '../../data/cases';
+
+export function getStaticPaths() {
+  return cases.map((c) => ({ params: { slug: c.slug }, props: { study: c } }));
+}
+
+const { study } = Astro.props as { study: CaseStudy };
+const i = cases.findIndex((c) => c.slug === study.slug);
+const next = cases[(i + 1) % cases.length];
+const chapterLabel = study.doorway === 'journey' ? '03 · Journey' : '04 · Business';
+---
+
+<Base title={`${study.title} · Nimit Mangal`} description={study.summary}>
+  <PageHeader back={{ href: url(`/#${study.doorway}`), label: `Back to ${chapterLabel}` }} />
+  <main class="cs">
+    <header class="cs-head">
+      <p class="eyebrow">Case study · {study.kicker} · entered from {chapterLabel}</p>
+      <h1 class="display">{study.title}</h1>
+      <p class="cs-summary">{study.summary}</p>
+    </header>
+
+    <nav class="cs-index" aria-label="Story beats">
+      <ol>
+        {
+          study.beats.map((b, n) => (
+            <li>
+              <a href={`#${b.key}`}>
+                <span class="mono">0{n + 1}</span> {b.title}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    {
+      study.beats.map((b, n) => (
+        <section class="beat" id={b.key}>
+          <div class="beat-meta">
+            <span class="mono">0{n + 1}</span>
+            <h2 class="display">{b.title}</h2>
+            <p class="beat-q mono">{b.question}</p>
+          </div>
+          <div class="beat-body">
+            {b.body?.length ? (
+              b.body.map((para) => <p>{para}</p>)
+            ) : (
+              <p class="tbd beat-prompt">{b.prompt}</p>
+            )}
+            {b.key === 'knot' && (
+              <p class="beat-hook mono">Interaction slot: drag-to-reveal stakeholders.</p>
+            )}
+            {b.key === 'decisions' && (
+              <p class="beat-hook mono">Artefact slot: rejected directions alongside the chosen one.</p>
+            )}
+          </div>
+        </section>
+      ))
+    }
+
+    <a class="cs-next" href={url(`/work/${next.slug}`)}>
+      <span class="eyebrow">Next</span>
+      <span class="display">{next.title}</span>
+    </a>
+  </main>
+</Base>
+
+<style>
+  .cs {
+    width: min(1100px, 100% - 2 * var(--gutter));
+    margin: 48px auto 120px;
+  }
+  .cs-head h1 {
+    font-size: clamp(48px, 9vw, 120px);
+    margin: 16px 0 20px;
+  }
+  .cs-summary {
+    font-size: 20px;
+    color: var(--ink-2);
+    max-width: 44ch;
+    margin: 0;
+  }
+  .cs-index {
+    margin: 56px 0 24px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .cs-index ol {
+    list-style: none;
+    margin: 0;
+    padding: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+  .cs-index a {
+    text-decoration: none;
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+  .cs-index a:hover {
+    color: var(--ink);
+  }
+  .cs-index .mono {
+    color: var(--ink-3);
+    margin-right: 4px;
+  }
+  .beat {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: 48px;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+  @media (max-width: 820px) {
+    .beat {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 40px 0;
+    }
+  }
+  .beat-meta .mono {
+    color: var(--signal);
+  }
+  .beat-meta h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    margin: 8px 0;
+  }
+  .beat-q {
+    color: var(--ink-3);
+    margin: 0;
+  }
+  .beat-body p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+    max-width: 60ch;
+  }
+  .beat-prompt {
+    color: var(--ink-3);
+  }
+  .beat-hook {
+    display: inline-block;
+    margin-top: 12px !important;
+    padding: 10px 12px;
+    border: 1px dashed var(--ink-3);
+    border-radius: 6px;
+    color: var(--ink-3);
+    font-size: 12px !important;
+  }
+  .cs-next {
+    display: grid;
+    gap: 6px;
+    margin-top: 72px;
+    text-decoration: none;
+  }
+  .cs-next .display {
+    font-size: clamp(36px, 6vw, 72px);
+    transition: color 0.2s;
+  }
+  .cs-next:hover .display {
+    color: var(--signal);
+  }
+</style>
